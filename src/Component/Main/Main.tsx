@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { CircularProgress } from '@material-ui/core';
+import React, { useEffect, useRef, useState } from 'react';
 import { DogBreed } from '../../Model/DogBreed';
 import DogService from '../../Utils/DogService';
 import useDebounce from '../../Utils/UseDebounce';
@@ -18,6 +19,13 @@ const Main = () => {
         setIsSearching(true);
         try {
             const result: DogBreed[] = await DogService.getDogBreed(searchText);
+            for (const item of result) {
+                if (item.reference_image_id) {
+                    item.reference_image_id = await DogService.getImage(
+                        item.reference_image_id
+                    );
+                }
+            }
             console.log(result);
             setDogBreeds(result);
         } catch (err) {
@@ -44,7 +52,15 @@ const Main = () => {
             />
 
             {isSearching ? (
-                <div>Searching dog breeds in progress ...</div>
+                <div>
+                    <div style={{ marginBottom: '5vh' }}>
+                        Searching dog breeds in progress ...
+                    </div>
+                    <CircularProgress
+                        size={'2.5em'}
+                        thickness={2}
+                    ></CircularProgress>
+                </div>
             ) : (
                 dogBreeds !== undefined &&
                 (dogBreeds.length > 0 ? (

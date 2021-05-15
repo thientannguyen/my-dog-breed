@@ -30,11 +30,12 @@ export default function DogBreeds(props: IDogBreeds) {
             name,
             height: height.metric,
             life_span,
-            reference_image_id,
+            image: reference_image_id,
             temperament,
             weight: weight.metric,
         })
     );
+    console.log(rows);
     const sortBy = useRef('name');
     const sortOrder = useRef<'asc' | 'desc' | undefined>('asc');
 
@@ -168,6 +169,7 @@ export default function DogBreeds(props: IDogBreeds) {
                             </TableCell>
                             <TableCell>Temperament</TableCell>
                             <TableCell>Weight</TableCell>
+                            <TableCell>Image</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -179,6 +181,17 @@ export default function DogBreeds(props: IDogBreeds) {
                                     <TableCell>{item.life_span}</TableCell>
                                     <TableCell>{item.temperament}</TableCell>
                                     <TableCell>{item.weight}</TableCell>
+                                    <TableCell>
+                                        {item.image ? (
+                                            <img
+                                                src={item.image}
+                                                style={{ width: '10vw' }}
+                                                alt={`img-${indx}`}
+                                            ></img>
+                                        ) : (
+                                            'There is no image'
+                                        )}
+                                    </TableCell>
                                 </TableRow>
                             );
                         })}
