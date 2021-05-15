@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DogBreed } from '../../Model/DogBreed';
 import DogService from '../../Utils/DogService';
 import useDebounce from '../../Utils/UseDebounce';
+import DogBreeds from '../DogBreeds/DogBreeds';
 import './Main.css';
 
 const Main = () => {
@@ -47,7 +48,7 @@ const Main = () => {
             ) : (
                 dogBreeds !== undefined &&
                 (dogBreeds.length > 0 ? (
-                    <div></div>
+                    <DogBreeds items={dogBreeds} />
                 ) : (
                     <h3>CANNOT FOUND DOG BREED!</h3>
                 ))
