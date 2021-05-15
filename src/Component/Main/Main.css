@@ -1,0 +1,12 @@
+.main-container {
+    margin: 3vh 5vw;
+}
+
+.textBox {
+    width: 50vw;
+    margin-bottom: 5vh;
+}
+
+.error {
+    color: darkred;
+}
