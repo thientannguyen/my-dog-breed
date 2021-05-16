@@ -8,8 +8,9 @@ import {
     TableSortLabel,
     Paper,
 } from '@material-ui/core';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { DogBreed } from '../../Model/DogBreed';
+import DogService from '../../Utils/DogService';
 import DogImage from '../DogImage/DogImage';
 
 export interface IDogBreeds {
@@ -129,6 +130,11 @@ export default function DogBreeds(props: IDogBreeds) {
         setSortItems(sortData(sortBy.current, sortOrder.current, rows));
     };
 
+    const loadImage = useCallback(async (id: string) => {
+        const result = await DogService.getImage(id);
+        return result;
+    }, []);
+
     return (
         <div className="container">
             <Paper>
@@ -183,7 +189,10 @@ export default function DogBreeds(props: IDogBreeds) {
                                     <TableCell>{item.temperament}</TableCell>
                                     <TableCell>{item.weight}</TableCell>
                                     <TableCell>
-                                        <DogImage id={item.image} />
+                                        <DogImage
+                                            id={item.image}
+                                            loadAction={loadImage}
+                                        />
                                     </TableCell>
                                 </TableRow>
                             );

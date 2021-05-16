@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import DogService from '../../Utils/DogService';
 import { CircularProgress } from '@material-ui/core';
 import './DogImage.css';
 
 export interface IDogImage {
     id: string;
+    loadAction: (id: string) => Promise<string>;
 }
 
 const DogImage = (props: IDogImage) => {
@@ -15,13 +15,13 @@ const DogImage = (props: IDogImage) => {
         const loadImage = async () => {
             setIsLoading(true);
             if (props.id) {
-                const result = await DogService.getImage(props.id);
+                const result = await props.loadAction(props.id);
                 if (result) setUrl(result);
             }
             setIsLoading(false);
         };
         loadImage();
-    }, [props.id]);
+    }, [props]);
 
     return (
         <div>
