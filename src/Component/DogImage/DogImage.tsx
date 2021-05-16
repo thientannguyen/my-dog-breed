@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import DogService from '../../Utils/DogService';
+import { CircularProgress } from '@material-ui/core';
 import './DogImage.css';
 
 export interface IDogImage {
@@ -25,7 +26,13 @@ const DogImage = (props: IDogImage) => {
     return (
         <div>
             {isLoading ? (
-                <div>Loading...</div>
+                <div className="loading">
+                    <div> Loading... </div>
+                    <CircularProgress
+                        size={'2.5em'}
+                        thickness={2}
+                    ></CircularProgress>
+                </div>
             ) : url ? (
                 <img src={url} className="imageContainer" alt="img"></img>
             ) : (
