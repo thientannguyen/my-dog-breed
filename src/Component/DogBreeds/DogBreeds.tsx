@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { useRef, useState } from 'react';
 import { DogBreed } from '../../Model/DogBreed';
+import DogImage from '../DogImage/DogImage';
 
 export interface IDogBreeds {
     items: DogBreed[];
@@ -129,7 +130,7 @@ export default function DogBreeds(props: IDogBreeds) {
     };
 
     return (
-        <div style={{ height: 630, width: '100%' }}>
+        <div className="container">
             <Paper>
                 <Table>
                     <TableHead>
@@ -182,15 +183,7 @@ export default function DogBreeds(props: IDogBreeds) {
                                     <TableCell>{item.temperament}</TableCell>
                                     <TableCell>{item.weight}</TableCell>
                                     <TableCell>
-                                        {item.image ? (
-                                            <img
-                                                src={item.image}
-                                                style={{ width: '10vw' }}
-                                                alt={`img-${indx}`}
-                                            ></img>
-                                        ) : (
-                                            'There is no image'
-                                        )}
+                                        <DogImage id={item.image} />
                                     </TableCell>
                                 </TableRow>
                             );

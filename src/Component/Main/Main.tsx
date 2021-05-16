@@ -19,13 +19,6 @@ const Main = () => {
         setIsSearching(true);
         try {
             const result: DogBreed[] = await DogService.getDogBreed(searchText);
-            for (const item of result) {
-                if (item.reference_image_id) {
-                    item.reference_image_id = await DogService.getImage(
-                        item.reference_image_id
-                    );
-                }
-            }
             console.log(result);
             setDogBreeds(result);
         } catch (err) {
